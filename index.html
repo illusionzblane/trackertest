@@ -162,11 +162,12 @@
             <h5>I'm a Project Manager with an aim to create influential designs and be a lead in the industry.</h5>
           </div>
         </div>
+        <button id="startBtn">Start Tracking</button>
+        <video id="videoElement" width="640" height="480" autoplay></video>
+        <canvas id="predictionCanvas" width="640" height="480"></canvas>
       </div>
               <!-- Camera Stream and Handtracking Section -->
-  <button id="startBtn">Start Tracking</button>
-  <video id="videoElement" width="640" height="480" autoplay></video>
-  <canvas id="predictionCanvas" width="640" height="480"></canvas>
+
     </div>
     <div class="introButtons">
       <div><h5>FEATURED PROJECTS ↓</h5></div>
@@ -324,6 +325,35 @@
       }
     }
 
+    function stopVideo() {
+  const video = document.getElementById('videoElement'); 
+  const canvas = document.querySelector('canvas'); 
+
+
+  if (video && video.srcObject) {
+    const stream = video.srcObject;
+    const tracks = stream.getTracks();
+    
+    tracks.forEach(track => track.stop()); 
+    video.srcObject = null; 
+  }
+
+
+  handTrack.stopVideo(video).then(() => {
+    console.log('Tracking Stopped');
+  }).catch(err => {
+    console.error('Error stopping hand tracking:', err);
+  });
+
+
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
+
+
     async function detectHands() {
       const predictions = await model.detect(videoElement);
       context.clearRect(0, 0, predictionCanvas.width, predictionCanvas.height);
@@ -348,12 +378,18 @@
       cursorBallSmall.style.transform = `translate(${x + cursorOffsetX}px, ${y + cursorOffsetY}px)`;
     }
 
-    document.getElementById('startBtn').addEventListener('click', async () => {
-      await loadModel();
-      startVideo();
-      document.getElementById('startBtn').textContent = 'Tracking Started';
-      document.getElementById('startBtn').disabled = true;
-    });
+    const startBtn = document.getElementById('startBtn');
+
+startBtn.addEventListener('click', async () => {
+  if (startBtn.textContent === 'Start Tracking') {
+    await loadModel();
+    startVideo();
+    startBtn.textContent = 'Stop Tracking';
+  } else {
+    stopVideo(); 
+    startBtn.textContent = 'Start Tracking';
+  }
+});
   </script>
 </body>
 </html>
