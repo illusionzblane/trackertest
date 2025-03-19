@@ -773,3 +773,54 @@ body{
     transform: scale(1.05);
 }
 
+.tracking{
+    margin-top: 80px;
+}
+
+.tracking>video{
+    display: none;
+}
+
+#predictionCanvas {
+    transition: all 0.3s ease-in-out;
+    border: 5px solid transparent;
+    border-image-slice: 1;
+    animation: borderAnimation 4s linear infinite;
+  }
+  
+  @keyframes borderAnimation {
+    0% {
+      border-image-source: linear-gradient(0deg, rgba(81, 12, 118, 0.7), transparent);
+    }
+    25% {
+      border-image-source: linear-gradient(90deg, rgba(81, 12, 118, 0.7), transparent);
+    }
+    50% {
+      border-image-source: linear-gradient(180deg, rgba(81, 12, 118, 0.7), transparent);
+    }
+    75% {
+      border-image-source: linear-gradient(270deg, rgba(81, 12, 118, 0.7), transparent);
+    }
+    100% {
+      border-image-source: linear-gradient(360deg, rgba(81, 12, 118, 0.7), transparent);
+    }
+  }
+  
+  .canvas-floating {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 360px;
+    height: 230px;
+    z-index: 9999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 330 / 230;
+    
+    border: 5px solid transparent;
+    border-image-slice: 1;
+    animation: borderAnimation 4s linear infinite;
+  }
+  
+  
+  
+  
