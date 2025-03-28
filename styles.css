@@ -774,6 +774,8 @@ body{
 }
 
 .tracking{
+    display: flex;
+    flex-direction: column;
     margin-top: 80px;
 }
 
@@ -811,7 +813,7 @@ body{
     bottom: 20px;
     right: 20px;
     width: 360px;
-    height: 230px;
+    height: 250px;
     z-index: 9999;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     aspect-ratio: 330 / 230;
@@ -822,5 +824,40 @@ body{
   }
   
   
-  
+  .tracking button {
+    padding: 10px 20px;
+    background-color: #101B20;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  #instructions {
+    background-color: transparent;
+    color: #101B20;
+    width: 20px;
+    height:3em;
+    font-size: large;
+    border-radius: 20px;
+  }
+
+  #instructionText{
+    font-family: "aktiv-grotesk", sans-serif;
+    font-weight: 300;
+    font-style:  normal;
+  }
+
+  .overlay {
+    display: none;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 500px;
+}
+.button-container {
+    position: relative;
+    display: inline-block;
+}
   

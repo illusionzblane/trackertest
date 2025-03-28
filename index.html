@@ -178,9 +178,21 @@
       </div>
     </div>
     <div class="tracking">
-      <button id="startBtn">Start Tracking</button>
+      <button id="startBtn">Activate Camera For Motion Tracking</button>
       <video id="videoElement" width="640" height="480" autoplay></video>
+      <div class="twoColumn">
       <canvas id="predictionCanvas" width="640" height="480"></canvas>
+      <div class="button-container">
+        <button id="instructions">ⓘ</button>
+        <div class="overlay" id="instructionText">
+          <h3>How to use my motion tracking implementation:</h3>
+          <h3>Place yourself in the center of the camera</h3>
+          <h3>Closed Hand = Scroll Down</h3>
+          <h3>Open Hand = Stop</h3>
+          <h3>Point Up = Return to Top of Page</h3>
+        </div>
+    </div>
+      </div>
     </div>
   <div class="projectsContainer">
       <div class="projectSection">
@@ -416,15 +428,28 @@
     const startBtn = document.getElementById('startBtn');
 
     startBtn.addEventListener('click', async () => {
-      if (startBtn.textContent === 'Start Tracking') {
+      if (startBtn.textContent === 'Activate Camera For Motion Tracking') {
         await loadModel();
         startVideo();
         startBtn.textContent = 'Stop Tracking';
       } else {
         stopVideo(); 
-        startBtn.textContent = 'Start Tracking';
+        startBtn.textContent = 'Activate Camera For Motion Tracking';
       }
     });
+</script>
+
+<script>
+  const button = document.getElementById("instructions");
+  const overlay = document.getElementById("instructionText");
+
+  button.addEventListener("mouseenter", () => {
+      overlay.style.display = "block";
+  });
+
+  button.addEventListener("mouseleave", () => {
+      overlay.style.display = "none";
+  });
 </script>
 
 <script>
